@@ -2,17 +2,24 @@
 <html>
 
 	<head>
-		<link type="text/css" rel="stylesheet" href="stylesheet.css"/>
-		<title>The Number Guessing Game</title>
+		<link rel='stylesheet' type='text/css' href='stylesheet.css'/>
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+	<script type='text/javascript' src='guessingGame.js'></script>
+        <title>The Number Guessing Game</title>
 	</head>
 	<body>
 		<div id="title">THE FANTASTIC NUMBER GUESSING GAME</div>
 	    <form>
 	    	<input id="field" type="text" name="number" value="Enter a number between 1 and 100!"><br>
-	    	<input class="guess" type="submit" value="predict">
 	    </form>
-	    
+	    <div id="enter" class="guess">submit your guess</div>
 	    <div class="guess" id="right">consult the crystal</div>
-	    <div class="guess" id="bottom">play again</div>
+	    <div class="guess" id="bottom">reset game</div>
+	    <div id="message"></div>
+	    <div id="comments"></div>
+	    <ul>Previous Guesses
+	    </ul>
+
+
 	</body>
 </html>
