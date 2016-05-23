@@ -1,5 +1,12 @@
 /* **** Global Variables **** */
 // try to elminate these global variables in your project, these are here just to start.
+/*
+
+Research what an IIFE (Immediately Invoked Function Expression) is, try to apply it to your Guessing Game code to eliminate Global
+Variables such as winNum, guesses, arr, etc.
+Here is a good link to get started: http://benalman.com/news/2010/11/immediately-invoked-function-expression/
+*/
+
 var winNum;
 var guesses;
 var arr;
