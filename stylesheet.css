@@ -49,10 +49,10 @@ body {
 }
 
 #bottom {
+    display: none;
     float: right;
     align-content: center;
     clear: both;
-
 }
 
 #field {
@@ -82,8 +82,8 @@ body {
 }
 
 ul {
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     opacity: 0.8;
     width: 210px;
     height: 30px;

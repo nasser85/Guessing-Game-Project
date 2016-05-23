@@ -38,10 +38,19 @@ function lowerOrHigher(player, winning, guesses){
 
 function checkGuess(player, winning, guesses){
 	if (player === winning) {
+		$("#bottom").css('display', 'block');
+		$("#field").css('display', 'none');
+		$("#enter").css('display', 'none');
+		$('#right').css('display', 'none');
 		return "Congratulations!  You guessed the correct number!";
-	} else if (guesses > 1) {
+	} else if (guesses > 0) {
+		$('#right').css('display', 'block');
 		return lowerOrHigher(player, winning, guesses);
 	} else {
+		$("#bottom").css('display', 'block');
+		$("#field").css('display', 'none');
+		$("#enter").css('display', 'none');
+		$('#right').css('display', 'none');
 		return "Sorry, you lost!  The number was " + winning + "!";
 	}
 	
@@ -88,7 +97,7 @@ function playAgain(){
 $(document).ready(function() {
 	$(document).one('ready', function() {
 		winNum = generateWinningNumber();
-    	guesses = 6;
+    	guesses = 5;
     	arr = [];
 	});
 	$('#message').click(function() {
@@ -97,32 +106,36 @@ $(document).ready(function() {
 	$('ul').click(function() {
 		$('li').toggle();
 	});
+
+	$("#field").on('submit', function() {
+		if (guesses > 0) {
+			var player = $("#field").val();
+			var previous = false;
+			for (var i = 0; i < arr.length; i++) {
+				if (parseInt(player) === arr[i]) {
+					previous = true;
+				}
+			}
+			if (!isNaN(player)) {
+				if (!previous) {
+					arr.push(parseInt(player));
+					guesses --;
+					$('ul').append("<li></li>");
+					$('li').last().text(player);
+					$('li').css({'display': 'none', 'font-size': '40px', 'color': 'black', "background-color": 'white'});
+					$('#message').css('display', 'block');
+					$('#message').text(checkGuess(parseInt(arr[arr.length-1]), winNum, guesses));
+				} else {
+					alert("You already guessed that number!  Choose another!")
+				}
+			} else {
+				alert("Please choose a number between 1 and 100");
+			}
+		}
+	});
 	
 	$("#enter").click(function() {
-		var player = $("#field").val();
-		var previous = false;
-		for (var i = 0; i < arr.length; i++) {
-			if (parseInt(player) === arr[i]) {
-				previous = true;
-			}
-		}
-		if (!isNaN(player)) {
-			if (!previous) {
-				arr.push(parseInt(player));
-				guesses --;
-				$('ul').append("<li></li>");
-				$('li').last().text(player);
-				$('li').css('display', 'none');
-				$('li').css('font-size', '40px');
-				$('#message').css('display', 'block');
-				$('#message').text(checkGuess(parseInt(arr[arr.length-1]), winNum, guesses));
-				$('#right').css('display', 'block');
-			} else {
-				alert("You already guessed that number!  Choose another!")
-			}
-		} else {
-			alert("Please choose a number between 1 and 100");
-		}
+		$("#field").submit();
 	});
 	$("#right").click(function() {
 		$('#message').css('display', 'block');
@@ -132,6 +145,12 @@ $(document).ready(function() {
 	});
 	$('#bottom').click(function() {
 		playAgain();
+	});
+	$('#field').keypress(function (x) {
+  		if (x.which === 13) {
+    		$(this).submit();
+    		return false;
+  		}
 	});
 	
 });
